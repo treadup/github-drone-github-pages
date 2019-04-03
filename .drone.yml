@@ -1,0 +1,27 @@
+kind: pipeline
+name: default
+
+steps:
+- name: build
+  image: python
+  environment:
+    GITHUB_DEPLOYMENT_KEY:
+      from_secret: GITHUB_DEPLOYMENT_KEY
+  commands:
+    # Create website
+    - pip install markdown2
+    - mkdir -p web/public
+    - markdown2 README.md > web/public/index.html
+    # Write GitHub deploy key
+    - mkdir ~/.ssh
+    - echo "$GITHUB_DEPLOYMENT_KEY" > ~/.ssh/id_rsa
+    - chmod 0600 ~/.ssh/id_rsa
+    # Deploy website to GitHub pages
+    - cd web
+    - git init
+    - git config user.name "CI"
+    - git config user.email "CI"
+    - git checkout -b master
+    - git add .
+    - git commit -m "Build"
+    - git push -f git@github.com:treadup/github-pages
