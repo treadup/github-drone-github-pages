@@ -11,7 +11,7 @@ steps:
     # Create website
     - pip install markdown2
     - mkdir -p web/public
-    - markdown2 README.md > web/public/index.html
+    - markdown2 README.md > web/index.html
     # Write GitHub deploy key
     - mkdir ~/.ssh
     - echo "$GITHUB_DEPLOYMENT_KEY" > ~/.ssh/id_rsa
