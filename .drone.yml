@@ -16,6 +16,8 @@ steps:
     - mkdir ~/.ssh
     - echo "$GITHUB_DEPLOYMENT_KEY" > ~/.ssh/id_rsa
     - chmod 0600 ~/.ssh/id_rsa
+    # Add github.com to known hosts
+    - ssh-keyscan github.com >> ~/.ssh/known_hosts
     # Deploy website to GitHub pages
     - cd web
     - git init
