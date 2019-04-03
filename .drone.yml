@@ -24,4 +24,4 @@ steps:
     - git checkout -b master
     - git add .
     - git commit -m "Build"
-    - git push -f git@github.com:treadup/github-pages
+    - git push -f git@github.com:treadup/github-pages master
